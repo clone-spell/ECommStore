@@ -1,0 +1,69 @@
+﻿@model ECommStoreWeb.ViewModels.ProductViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Edit Product</h4>
+<hr />
+<div class="row">
+    @if(Model.ProductPhotoLink != null)
+    {
+        <div class="col-md-4">
+            <img class="img-thumbnail w-50" src="~/ProductImages/@Model.ProductPhotoLink" alt="...">
+        </div>
+    }
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label hidden asp-for="ProductId" class="control-label"></label>
+                <input hidden asp-for="ProductId" class="form-control" />
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label hidden asp-for="ProductPhotoLink" class="control-label"></label>
+                <input hidden asp-for="ProductPhotoLink" class="form-control" />
+                <span asp-validation-for="ProductPhotoLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductPhoto" class="control-label"></label>
+                <input asp-for="ProductPhoto" class="form-control" />
+                <span asp-validation-for="ProductPhoto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductCategory" class="control-label"></label>
+                <input asp-for="ProductCategory" class="form-control" />
+                <span asp-validation-for="ProductCategory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StockQuantity" class="control-label"></label>
+                <input asp-for="StockQuantity" class="form-control" />
+                <span asp-validation-for="StockQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

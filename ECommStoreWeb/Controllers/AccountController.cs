@@ -151,9 +151,12 @@ namespace ECommStoreWeb.Controllers
             if(oldPhotoLink != null)
             {
                 string oldPhotoPath = Path.Combine(filePath, oldPhotoLink);
-                if(System.IO.File.Exists(oldPhotoPath))
+                if (System.IO.File.Exists(oldPhotoPath))
+                {
+                    Thread.Sleep(1000);
                     System.IO.File.Delete(oldPhotoPath);
-                
+                }
+
             }
             return fileName;
         }

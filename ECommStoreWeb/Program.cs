@@ -1,4 +1,5 @@
 using ECommStoreWeb.Data;
+using ECommStoreWeb.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 
+builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
 

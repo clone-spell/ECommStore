@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ECommStoreWeb.Models
+namespace ECommStoreWeb.ViewModels
 {
-    public class Product
+    public class ProductViewModel
     {
-        [Key]
         public int ProductId { get; set; }
-
         [Required(ErrorMessage = "Product name is required.")]
         public string ProductName { get; set; }
 
         public string? ProductPhotoLink { get; set; }
+
+        public IFormFile? ProductPhoto { get; set; }
 
         public string ProductCategory { get; set; }
 

@@ -38,7 +38,7 @@ namespace ECommStoreWeb.Repository
             p.Description = product.Description;
             p.Price = product.Price;
             p.StockQuantity = product.StockQuantity;
-
+            p.ProductPhotoLink = product.ProductPhotoLink;
             _context.Products.Update(p);
             _context.SaveChanges();
         }
