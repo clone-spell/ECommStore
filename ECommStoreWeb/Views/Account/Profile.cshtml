@@ -4,19 +4,26 @@
     ViewData["Title"] = "Profile";
 }
 
-<h1>Profile</h1>
-
-<h4>Profile</h4>
-<hr />
 <div class="row">
+    <div class="col">
+        <h4>User Profile</h4>
+    </div>
+    <div class="col text-end">
+        <form asp-action="Logout" method="post">
+            <input type="submit" value="Logout" class="btn btn-sm btn-danger" />
+        </form>
+    </div>
+</div>
+<hr />
+<div class="row mt-5">
     @if (Model.PhotoLink != null)
     {
         <div class="col-md-4">
-            <img class="img-thumbnail" src="~/ProfilePhotos/@Model.PhotoLink" alt="..." style="width:200px; height:200px;" />
+            <img class="img-thumbnail" src="~/ProfileImages/@Model.PhotoLink" alt="..." style="width:200px; height:200px;" />
         </div>
     }
     <div class="col-md-4">
-        <form asp-action="Profile">
+        <form asp-action="Profile" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>

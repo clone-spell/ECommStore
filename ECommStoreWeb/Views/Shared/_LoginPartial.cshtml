@@ -1,0 +1,16 @@
+﻿@inject SignInManager<AppUser> _signInManager
+
+
+@if (!_signInManager.IsSignedIn(User))
+{
+	<div class="btn-group">
+		<a asp-controller="Account" asp-action="Login" class="btn btn-sm btn-outline-primary">Login</a>
+		<a asp-controller="Account" asp-action="Register" class="btn btn-sm btn-outline-primary">Register</a>
+	</div>
+}
+else
+{
+	<div>
+		<a asp-controller="Account" asp-action="Profile" class="text-secondary">@User.Identity.Name</a>
+	</div>
+}

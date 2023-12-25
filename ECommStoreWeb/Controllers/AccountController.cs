@@ -23,7 +23,7 @@ namespace ECommStoreWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Register()
         {
-            string[] roles = { "seller", "costomer" };
+            string[] roles = { "seller", "customer" };
             foreach (string role in roles)
             {
                 if(!await _roleManager.RoleExistsAsync(role))
@@ -79,6 +79,18 @@ namespace ECommStoreWeb.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            if (_signInManager.IsSignedIn(User))
+            {
+				await _signInManager.SignOutAsync();
+                return RedirectToAction("Index", "Home");
+			}
+
+			return BadRequest();
+        }
+
         [HttpGet]
         public async Task<IActionResult> Profile()
         {
@@ -88,7 +100,7 @@ namespace ECommStoreWeb.Controllers
             var user = await _signInManager.UserManager.GetUserAsync(User);
             Profile model = new Profile()
             {
-                Name = user.Name, Email = user.Email, Age = user.Age, PhotoLink = user.PhotoLink
+                Name = user.Name, Email = user.Email, Age = user.Age, PhotoLink = user.PhotoLink, PhoneNumber = user.PhoneNumber
             };
 
             return View(model);
@@ -117,10 +129,13 @@ namespace ECommStoreWeb.Controllers
             return View(model);
         }
 
-        public string UploaadProfilePhoto(IFormFile file, string oldPhotoLink)
+        public string UploaadProfilePhoto(IFormFile? file, string? oldPhotoLink)
         {
             if (file == null)
-                return oldPhotoLink;
+                if (oldPhotoLink == null)
+                    return "";
+                else
+                    return oldPhotoLink;
 
             //upload profile image
             string fileName = Guid.NewGuid().ToString() + ".jpg"; 
@@ -133,10 +148,13 @@ namespace ECommStoreWeb.Controllers
             file.CopyTo(new FileStream(fullPath, FileMode.Create));
 
             //delete old profile image
-            string oldPhotoPath = Path.Combine(filePath, oldPhotoLink);
-            if(System.IO.File.Exists(oldPhotoPath))
-                System.IO.File.Delete(oldPhotoPath);
-
+            if(oldPhotoLink != null)
+            {
+                string oldPhotoPath = Path.Combine(filePath, oldPhotoLink);
+                if(System.IO.File.Exists(oldPhotoPath))
+                    System.IO.File.Delete(oldPhotoPath);
+                
+            }
             return fileName;
         }
     }
