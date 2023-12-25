@@ -13,13 +13,12 @@ namespace ECommStoreWeb.Repository
         }
 
 
-
+        //products
         public void AddProduct(Product product)
         {
             _context.Products.Add(product);
             _context.SaveChanges();
         }
-
         public void DeleteProduct(int id)
         {
             var product = _context.Products.Where(x=>x.ProductId == id).FirstOrDefault();
@@ -29,7 +28,6 @@ namespace ECommStoreWeb.Repository
                 _context.SaveChanges();
             }
         }
-
         public void EditProduct(Product product)
         {
             Product p = _context.Products.Where(x=>x.ProductId == product.ProductId).FirstOrDefault();
@@ -42,15 +40,42 @@ namespace ECommStoreWeb.Repository
             _context.Products.Update(p);
             _context.SaveChanges();
         }
-
         public IEnumerable<Product> GetAllProducts()
         {
             return _context.Products;
         }
-
         public Product GetProduct(int id)
         {
             return _context.Products.Where(x=>x.ProductId == id).FirstOrDefault();
+        }
+
+
+        //cart items
+        public void AddToCart(Cart cart)
+        {
+            _context.Carts.Add(cart);
+            _context.SaveChanges();
+        }
+        public void RemoveFromCart(Cart cart)
+        {
+            
+                _context.Carts.Remove(cart);
+                _context.SaveChanges();
+            
+        }
+        public IEnumerable<Cart> GetAllCartItemByUser(string id)
+        {
+            var cartItems = _context.Carts.Where(x => x.UserId == id).ToList();
+            return cartItems;
+        }
+        public void EditCart(Cart cart)
+        {
+            _context.Carts.Update(cart);
+            _context.SaveChanges();
+        }
+        public Cart GetCartItemById(int id)
+        {
+            return _context.Carts.Where(x => x.Id == id).FirstOrDefault();
         }
     }
 }
