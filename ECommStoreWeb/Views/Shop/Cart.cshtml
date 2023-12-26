@@ -60,7 +60,7 @@
                 @Html.DisplayFor(modelItem => item.CartQuantity)
             </td>
             <td>
-                @Html.ActionLink("Buy", "Buy", new {  id=item.ProductId  }) |
+                @Html.ActionLink("Buy", "Buy", new {  id=item.ProductId, q=item.CartQuantity  }) |
                 @Html.ActionLink("Remove", "RemoveFromCart", new { id=item.Id  })
             </td>
         </tr>

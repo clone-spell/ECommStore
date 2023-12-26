@@ -17,6 +17,10 @@ namespace ECommStoreWeb.Repository
         void RemoveFromCart(Cart cart);
         void EditCart(Cart cart);
         IEnumerable<Cart> GetAllCartItemByUser(string id);
+        Cart GetCartItem(int productId, string userId);
         Cart GetCartItemById(int id);
+
+        //buy item
+        void AddToOrder(Order order);
     }
 }

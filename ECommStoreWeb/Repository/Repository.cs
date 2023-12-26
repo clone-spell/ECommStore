@@ -77,5 +77,18 @@ namespace ECommStoreWeb.Repository
         {
             return _context.Carts.Where(x => x.Id == id).FirstOrDefault();
         }
+        public Cart GetCartItem(int productId, string userId)
+        {
+            var cartItem = _context.Carts.Where(x => x.UserId == userId && x.ProductId == productId).FirstOrDefault();
+            return cartItem;
+        }
+
+        //buy item
+        public void AddToOrder(Order order)
+        {
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+        }
+
     }
 }

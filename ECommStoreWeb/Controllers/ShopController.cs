@@ -29,12 +29,7 @@ namespace ECommStoreWeb.Controllers
 			return View(products);
 		}
 
-		[HttpPost]
-		public IActionResult Buy()
-		{
-			return View();
-		}
-
+        [HttpGet]
         public async Task<IActionResult> Cart()
         {
             var user = await _signInManager.UserManager.GetUserAsync(User);
@@ -107,6 +102,37 @@ namespace ECommStoreWeb.Controllers
                 return RedirectToAction("Cart");
             }
             return BadRequest("from : RemoveFromCart\nSomthing is wrong");
+        }
+
+		[HttpGet]
+		public async Task<IActionResult> Buy(int id, int q)
+		{
+            var user = await _signInManager.UserManager.GetUserAsync(User);
+            var product = _repository.GetProduct(id);
+            Order model = new Order();
+            model.OrderId = Guid.NewGuid();
+            model.ProductId = product.ProductId;
+            model.UserId = user.Id;
+            model.Quantity = q;
+            model.Placed = true;
+
+			return View(model);
+		}
+
+        [HttpPost]
+        public IActionResult Buy(Order model)
+        {
+            if (ModelState.IsValid)
+            {
+                _repository.AddToOrder(model);
+                var cartItem = _repository.GetCartItem(model.ProductId, model.UserId);
+                if(cartItem != null)
+                {
+                    _repository.RemoveFromCart(cartItem);
+                }
+                return RedirectToAction("index", "shop");
+            }
+            return View(model);
         }
 	}
 }

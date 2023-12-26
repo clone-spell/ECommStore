@@ -1,0 +1,61 @@
+﻿@model ECommStoreWeb.Models.Order
+
+@{
+    ViewData["Title"] = "Buy";
+}
+
+<h4>Buy</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Buy">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label hidden asp-for="UserId" class="control-label"></label>
+                <input hidden asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label hidden asp-for="ProductId" class="control-label"></label>
+                <input hidden asp-for="ProductId" class="form-control" />
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label hidden asp-for="ExpectedDeleveryDate" class="control-label"></label>
+                <input hidden asp-for="ExpectedDeleveryDate" class="form-control" />
+                <span asp-validation-for="ExpectedDeleveryDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label hidden class="form-check-label">
+                    <input hidden class="form-check-input" asp-for="Placed" /> @Html.DisplayNameFor(model => model.Placed)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label hidden class="form-check-label">
+                    <input hidden class="form-check-input" asp-for="Packed" /> @Html.DisplayNameFor(model => model.Packed)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label hidden class="form-check-label">
+                    <input hidden class="form-check-input" asp-for="Shipped" /> @Html.DisplayNameFor(model => model.Shipped)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label hidden class="form-check-label">
+                    <input hidden class="form-check-input" asp-for="OutForDelevery" /> @Html.DisplayNameFor(model => model.OutForDelevery)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Buy" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

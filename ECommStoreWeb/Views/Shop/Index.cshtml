@@ -55,7 +55,7 @@
                     @Html.DisplayFor(modelItem => item.StockQuantity)
                 </td>
                 <td class="row">
-                    <form class="col-sm-6" asp-route-id="@item.ProductId" method="post" asp-action="Buy"><input class="btn btn-sm btn-primary" value="Buy" type="submit" /></form>
+                    @Html.ActionLink("Buy", "Buy", new {  id=item.ProductId, q=1  }, new{@class = "btn btn-sm btn-primary col-sm-6"})
                     <form class="col-sm-6" asp-route-id="@item.ProductId" method="post" asp-action="AddToCart"><input class="btn btn-sm btn-success" value="Add To Cart" type="submit" /></form>
                 </td>
             </tr>
