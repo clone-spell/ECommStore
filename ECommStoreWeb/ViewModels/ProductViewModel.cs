@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace ECommStoreWeb.ViewModels
 {
@@ -13,6 +14,7 @@ namespace ECommStoreWeb.ViewModels
         public IFormFile? ProductPhoto { get; set; }
 
         public string ProductCategory { get; set; }
+        public IEnumerable<SelectListItem>? ProductCategoryList { get; set; }
 
         public string Description { get; set; }
 

@@ -90,5 +90,64 @@ namespace ECommStoreWeb.Repository
             _context.SaveChanges();
         }
 
+
+        //category
+        public Category GetCategory(int id)
+        {
+            return _context.Categories.Where(x=>x.Id == id).FirstOrDefault();
+        }
+        public IEnumerable<Category> GetAllCategories()
+        {
+            return _context.Categories;
+        }
+        public void AddCategory(Category category)
+        {
+            _context.Categories.Add(category);
+            _context.SaveChanges();
+        }
+        public void EditCategory(Category category)
+        {
+            _context.Categories.Update(category);
+            _context.SaveChanges();
+        }
+        public void DeleteCategory(int id)
+        {
+            var category = _context.Categories.Where(x=>x.Id == id).FirstOrDefault();
+            if(category != null)
+            {
+                _context.Categories.Remove(category);
+                _context.SaveChanges();
+            }
+        }
+
+
+        //sub category
+        public SubCategory GetSubCategory(int id)
+        {
+            return _context.SubCategories.Where(x => x.Id == id).FirstOrDefault();
+        }
+        public IEnumerable<SubCategory> GetAllSubCategories()
+        {
+            return _context.SubCategories;
+        }
+        public void AddSubCategory(SubCategory subCategory)
+        {
+            _context.SubCategories.Add(subCategory);
+            _context.SaveChanges();
+        }
+        public void EditSubCategory(SubCategory SubCategory)
+        {
+            _context.SubCategories.Update(SubCategory);
+            _context.SaveChanges();
+        }
+        public void DeleteSubCategory(int id)
+        {
+            var subCat = _context.SubCategories.Where(x=>x.Id== id).FirstOrDefault();
+            if(subCat != null)
+            {
+                _context.SubCategories.Remove(subCat);
+                _context.SaveChanges();
+            }
+        }
     }
 }

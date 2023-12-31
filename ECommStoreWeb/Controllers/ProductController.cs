@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ECommStoreWeb.Controllers
 {
@@ -30,7 +31,14 @@ namespace ECommStoreWeb.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var vm = new ProductViewModel();
+            vm.ProductCategoryList = _repositories.GetAllSubCategories().Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            }).ToList();
+
+            return View(vm);
         }
 
         [HttpPost]
@@ -51,6 +59,12 @@ namespace ECommStoreWeb.Controllers
                 TempData["success"] = "Product Added Successfully!";
                 return RedirectToAction("Index");
             }
+
+            model.ProductCategoryList = _repositories.GetAllSubCategories().Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            }).ToList();
             return View(model);
         }
 
@@ -66,6 +80,12 @@ namespace ECommStoreWeb.Controllers
             viewModel.StockQuantity = model.StockQuantity;
             viewModel.ProductId = model.ProductId;
             viewModel.ProductCategory = model.ProductCategory;
+            viewModel.ProductCategoryList = _repositories.GetAllSubCategories().Select(x=> new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+                Selected = model.ProductCategory.Equals(x.Id)
+            }).ToList();
 
             return View(viewModel);
         }
@@ -88,6 +108,12 @@ namespace ECommStoreWeb.Controllers
                 TempData["success"] = "Changes are Saved Successfully!";
                 return RedirectToAction("Index");
             }
+
+            viewModel.ProductCategoryList = _repositories.GetAllSubCategories().Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            }).ToList();
             return View(viewModel);
         }
 

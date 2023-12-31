@@ -12,6 +12,20 @@ namespace ECommStoreWeb.Repository
         void EditProduct(Product product);
         void DeleteProduct(int id);
 
+        //categories
+        Category GetCategory(int id);
+        IEnumerable<Category> GetAllCategories();
+        void AddCategory(Category category);
+        void EditCategory(Category category);
+        void DeleteCategory(int id);
+
+        //sub-categories
+        SubCategory GetSubCategory(int id);
+        IEnumerable<SubCategory> GetAllSubCategories();
+        void AddSubCategory(SubCategory subCategory);
+        void EditSubCategory(SubCategory SubCategory);
+        void DeleteSubCategory(int id);
+
         //cart items
         void AddToCart(Cart cart);
         void RemoveFromCart(Cart cart);

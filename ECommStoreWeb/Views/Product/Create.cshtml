@@ -27,9 +27,13 @@
                 <span asp-validation-for="ProductPhoto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductCategory" class="control-label"></label>
-                <input asp-for="ProductCategory" class="form-control" />
-                <span asp-validation-for="ProductCategory" class="text-danger"></span>
+                <label asp-for="ProductCategory" class="form-label"></label>
+                <select asp-for="ProductCategory" class="form-select">
+                    @foreach (var item in Model.ProductCategoryList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
